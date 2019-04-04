@@ -1,0 +1,26 @@
+mongo
+show dbs
+use QP_DB
+show collections
+db.cname.find().pretty()
+to drop use db first and then give db.dropDatabase()
+
+db.Ledger.find().pretty();
+db.Users.find().pretty();
+
+
+db.Ledger.aggregate([
+  {$match: {"focusArea" : "FA1"}}
+]).pretty();
+
+db.Ledger.aggregate([
+  {$match: {"focusArea" : "FA1"}},
+  { $sort : {"lastUsed" : -1} }
+]).pretty();
+
+db.Ledger.find().sort({lastUsed: 1}).pretty();
+
+db.Ledger.find().sort({lastUsed: -1}).pretty();
+
+db.Users.find().sort({lastLogin: 1}).pretty();
+db.Users.find().sort({lastLogin: -1}).pretty();

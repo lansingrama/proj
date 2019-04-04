@@ -1,0 +1,141 @@
+ssh-keygen -t ed25519 -C "venkataraman.trn@ad.infosys.com"
+
+copy pub key to clip
+
+cat ~/.ssh/id_ed25519.pub | clip
+
+ssh -T git@infygit.ad.infosys.com
+
+
+
+cd existing_folder
+git init
+git remote add origin git@infygit.ad.infosys.com:venkataraman.TRN/qp-generation.git
+touch .gitignore
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+project - settings - repository - developers can push
+
+
+$ git push --force origin master
+
+$ git pull origin master --allow-unrelated-histories
+
+$ git fetch origin master
+
+
+$ git push -u origin master
+
+$ git commit -m "Initial commit"
+
+$ git add .
+
+$  touch .gitignore
+
+git remote add origin git@infygit.ad.infosys.com:venkataraman.TRN/qp-generation.git
+
+$ git init
+
+http://infygit.ad.infosys.com/venkataraman.TRN/assessment-ledger
+
+
+$ cd project
+
+---------------------------------------------------------------------------------------------------------------------
+
+to delete 
+git rm --cached QPUI/ -r
+
+
+git rm file1.txt
+git commit -m "remove file1.txt"
+But if you want to remove the file only from the Git repository and not remove it from the filesystem, use:
+
+git rm --cached file1.txt
+git commit -m "remove file1.txt"
+And to push changes to remote repo
+
+git push origin branch_name  
+
+master - branch
+origin - remote rep
+-------------------------------------------
+
+git checkout master
+git merge origin/master --allow-unrelated-histories
+Resolve conflict, then
+
+git add -A .
+git commit -m "Upload"
+git push
+----------------------------------------
+git branch --set-upstream-to=origin/master master
+git pull
+
+or 
+git pull origin master
+
+
+curl --header "PRIVATE-TOKEN: TnKiYzQDaZNiFyjd37bP" "http://infygit.ad.infosys.com/api/v4/projects/21571/repository/commits"
+----------------------------------------
+
+PAYLOAD=$(cat << 'JSON'
+{
+  "branch": "master",
+  "commit_message": "some commit message",
+  "actions": [
+    {
+      "action": "create",
+      "file_path": "foo/bar",
+      "content": "some content"
+    },
+    {
+      "action": "delete",
+      "file_path": "foo/bar2"
+    },
+    {
+      "action": "move",
+      "file_path": "foo/bar3",
+      "previous_path": "foo/bar4",
+      "content": "some content"
+    },
+    {
+      "action": "update",
+      "file_path": "foo/bar5",
+      "content": "new content"
+    },
+    {
+      "action": "chmod",
+      "file_path": "foo/bar5",
+      "execute_filemode": true
+    }
+  ]
+}
+JSON
+)
+curl --request POST --header "PRIVATE-TOKEN: TnKiYzQDaZNiFyjd37bP" --header "Content-Type: application/json" --data "$PAYLOAD" http://infygit.ad.infosys.com/api/v4/projects/21571/repository/commits
+---------------------------------------------------------------------------------------------------------------
+
+curl --request POST --header "PRIVATE-TOKEN: TnKiYzQDaZNiFyjd37bP" --header "Content-Type: multipart/form-data" --form "file=@d:/1.png" http://infygit.ad.infosys.com/api/v4/projects/21571/uploads
+
+
+------------------------------------------------------------------
+
+curl --request POST --header "PRIVATE-TOKEN: TnKiYzQDaZNiFyjd37bP" \
+--form "namespace=idkwatthisis" \
+--form "path=impapi" \
+--form "file=@d:/1.txt"
+--form "override_params[visibility]=public" \
+http://infygit.ad.infosys.com/api/v4/projects/import
+------------------------------------------------------------------
+curl --request POST --header "PRIVATE-TOKEN: TnKiYzQDaZNiFyjd37bP" \
+--form "namespace=email" \
+--form "path=impapi" \
+--form "file=@/1.png"
+--form "override_params[visibility]=private" \
+http://infygit.ad.infosys.com/api/v4/projects/21571/import
+
+
+/uploads/57a045ce332fa5d86837be22d3f1acae/1.png
